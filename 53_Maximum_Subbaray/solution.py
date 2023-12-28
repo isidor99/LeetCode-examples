@@ -5,18 +5,13 @@ class Solution(object):
         :rtype: int
         """
         
+        # Space and time complexity is O(n)
         # Create array to save sum
-        res = [0] * len(nums)
-        res[0] = nums[0]
+        res = [*nums]
         
-        # Loop through array and check if current element is bigger that last sum
+        # Loop through array and save bigger number between current number and sum of current number and last one
         for n in range(1, len(nums)):
-            if nums[n] > res[n - 1] and res[n - 1] < 0:
-                # If current number is bigger then last sum, save that number
-                res[n] = nums[n]
-            else:
-                # In other case, add that number to previous sum
-                res[n] = res[n - 1] + nums[n]
+            res[n] = max(nums[n], nums[n] + res[n - 1])
             
         # Return result
         return max(res)
