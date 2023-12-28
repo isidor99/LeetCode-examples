@@ -6,8 +6,17 @@ class Solution(object):
         :rtype: List[int]
         """
         
-        # O(n^2)
-        for i in range(0, len(nums) - 1):
-            for j in range(i + 1, len(nums)):
-                if nums[i] + nums[j] == target:
-                    return [i, j]
+        # O(n)
+        hash_map = {}
+        for i in range(len(nums)):
+            key = nums[i]
+            value = target - nums[i]
+            
+            # Check if hash map contains key equals to value
+            if value in hash_map:
+                return [hash_map[value], i]
+
+            # Save index in hash map
+            hash_map[key] = i
+
+        return None
