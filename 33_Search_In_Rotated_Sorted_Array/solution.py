@@ -6,6 +6,10 @@ class Solution(object):
         :rtype: int
         """
         
+        # check if array is already sorted
+        if nums[0] < nums[len(nums) - 1]:
+            return self.bin_search(nums, 0, len(nums) - 1, target)
+        
         # loop through array and try to find pivot index (index where array is rotated)
         for i in range(len(nums) - 1):
             if nums[i] > nums[i + 1]:
