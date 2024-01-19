@@ -34,13 +34,33 @@ class Solution(object):
         # depth first search algorithm, iterative implementation
         def dfs(i, j):
             stack = [(i, j)]
+            
             while len(stack) > 0:
                 v = stack.pop()
+                
                 if visited[v[0]][v[1]] == False:
                     visited[v[0]][v[1]] = True
+                    
                     for k in neighbors(v[0], v[1]):
                         if grid[k[0]][k[1]] == '1' and visited[k[0]][k[1]] == False:
                             stack.append(k)
+        
+        
+        # breadth first search algorithm
+        def bfs(i, j):
+            queue = [(i, j)]
+            
+            while len(queue) > 0:
+                # get first element from queue, then remove that element
+                v = queue.pop(0)
+                
+                if visited[v[0]][v[1]] == False:
+                    visited[v[0]][v[1]] = True
+                    
+                    for k in neighbors(v[0], v[1]):
+                        if grid[k[0]][k[1]] == '1' and visited[k[0]][k[1]] == False:
+                            queue.append(k)
+
 
         # loop through all nodes and check if node value is 0, and if not was visited
         # if it wasn't visited, we found an island
@@ -48,7 +68,7 @@ class Solution(object):
         for i in range(rows):
             for j in range(cols):
                 if grid[i][j] == '1' and visited[i][j] == False:
-                    dfs(i, j)
+                    bfs(i, j)
                     result = result + 1
 
         # return result            
